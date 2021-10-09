@@ -3,18 +3,18 @@ class Unique
 {
     T* data_{};
 public:
-    explicit Unique(T* ptr) : data_(ptr) {};
+    explicit Unique(T* ptr = nullptr) : data_(ptr) {};
     ~Unique() {
         delete data_;
     }
-    Unique(const Unique&) = delete;
-    Unique& operator=(const Unique&) = delete;
+    Unique(const Unique<T>&) = delete;
+    Unique<T>& operator=(const Unique<T>&) = delete;
 
     Unique(Unique&& other) noexcept {
         data_ = other.data_;
         other.data_ = nullptr;
     }
-    Unique&& operator=(Unique&& other) {
+    Unique<T>& operator=(Unique&& other) {
         if (this != &other) {
             delete data_;
             data_ = other.data_;
@@ -41,8 +41,8 @@ public:
         return temp;
     }
 
-    void reset(T* ptr) {
-        data_ = ptr;
-        ptr = nullptr;
+    void reset(T* ptr = nullptr) {
+        delete data_;
+        data_ = ptr;       
     }
 };
