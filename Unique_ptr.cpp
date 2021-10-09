@@ -1,7 +1,7 @@
 template <typename T>
 class Unique 
 {
-    T* data_;
+    T* data_{};
 public:
     explicit Unique(T* ptr) : data_(ptr) {};
     ~Unique() {
@@ -15,9 +15,34 @@ public:
         other.data_ = nullptr;
     }
     Unique&& operator=(Unique&& other) {
-        if (this != other) {
-            // TO DO
+        if (this != &other) {
+            delete data_;
+            data_ = other.data_;
+            other.data_ = nullptr;
         }
         return *this;
+    }
+
+    T& operator*() const {
+        return *data_;
+    }
+
+    T* operator->() const {
+        return data_;
+    }
+
+    T* get() const {
+        return data_;
+    }
+
+    T* release() {
+        T* temp = data_;
+        data_ = nullptr;
+        return temp;
+    }
+
+    void reset(T* ptr) {
+        data_ = ptr;
+        ptr = nullptr;
     }
 };
