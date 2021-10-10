@@ -6,6 +6,8 @@ add_executable(${PROJECT_NAME}-ut tests.cpp)
 
 target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -Wpedantic -Wconversion -O3)
 target_compile_options(${PROJECT_NAME}-ut PRIVATE -Wall -Wextra -Wpedantic -Wconversion -O3)
+set(CMAKE_CXX_FLAGS "-g -O0 -Wall -fprofile-arcs -ftest-coverage")
+set(CMAKE_CXX_OUTPUT_EXTENSION_REPLACE 1)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
                         CXX_STANDARD 17
@@ -19,6 +21,7 @@ target_link_libraries(${PROJECT_NAME}-ut gtest_main)
 
 enable_testing()
 add_test(NAME testsForUniquePtr COMMAND ${PROJECT_NAME}-ut)
+
 
 
 include(FetchContent)
