@@ -1,6 +1,6 @@
 #include <iostream>
 #include <memory>
-#include "Unique_ptr.cpp"
+#include "Unique.hpp"
 
 int main() {
     std::unique_ptr<int> p{new int(5)};

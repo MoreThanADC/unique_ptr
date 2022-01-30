@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
 project(UniquePtr)
 
-add_executable(${PROJECT_NAME} main.cpp Unique_ptr.cpp)
+add_executable(${PROJECT_NAME} main.cpp)
 add_executable(${PROJECT_NAME}-ut tests.cpp)
 
 target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -Wpedantic -Wconversion -O3)
