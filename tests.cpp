@@ -65,5 +65,5 @@ TEST_F(UniqueTestWithRealValue, UsingResetWithArgumentExpectNewPointerInPlaceOld
 
 TEST (UniqueTestWithOtherType, CreatePointerWithOneArgumentAsStringAndExpectAdressesAreTheSame) {
     Unique<std::string> uniq = new std::string(testString);
-    EXPECT_EQ(*uniq.get(), "Ala ma kota");
+    EXPECT_EQ(*uniq.get(), testString);
 }
