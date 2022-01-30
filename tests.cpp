@@ -3,6 +3,7 @@
 #include "Unique.hpp"
 
 #include <memory>
+#include <stdexcept>
 
 // class UniqueTest : public ::testing::Test {
 
@@ -10,7 +11,7 @@
 // }
 
 TEST(UniquePointerTests, CreatePointerWithoutArgsAndExpectNullptr) {
-    Unique::Uniq<int> uniq;
+    Unique<int> uniq;
     EXPECT_EQ(uniq.get(), nullptr);
 }
 
@@ -31,6 +32,13 @@ TEST(UniquePointerTests, UsingStarOperatorExpectAccessToTheElement) {
     Unique<int> uniq{number};
     EXPECT_EQ(*uniq, *number);
 }
+
+TEST(UniquePointerTests, UsingStarOperatorOnNullptrExpectThrowAnException) {
+    int* number = nullptr;
+    Unique<int> uniq{number};
+    EXPECT_THROW(*uniq, std::runtime_error);
+}
+
 
 TEST(UniquePointerTests, UsingRelaseExpectReturnedValueIsRawPointer) {
     int* number = new int(42);

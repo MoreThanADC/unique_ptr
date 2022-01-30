@@ -1,5 +1,6 @@
 #include <iostream>
 #include <memory>
+
 #include "Unique.hpp"
 
 int main() {
@@ -32,7 +33,7 @@ int main() {
     // std::cout << *p3 << ' ' << *ptr3 << '\n';
     ptr3.reset(new int{10});
     std::cout << *ptr3 << '\n';
-    ptr3.reset();
+    ptr3.reset();   
 
 
     return 0;

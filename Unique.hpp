@@ -1,10 +1,11 @@
 #pragma once
 
+#include <stdexcept>
+
 template <class T>
 class Unique {
 public:
-    Unique();
-    Unique(T* ptr);
+    Unique(T* ptr = nullptr);
     ~Unique();
 
     Unique(const Unique<T>&) = delete;
@@ -18,15 +19,11 @@ public:
 
     T* get() const;
     T* release();
-    void reset(T* newPtr);
+    void reset(T* newPtr = nullptr);
 
 private:
     T* data_{};
 };
-
-template <class T>
-Unique<T>::Unique()
-    : data_(nullptr) {}
 
 template <class T>
 Unique<T>::Unique(T* ptr)
@@ -55,6 +52,9 @@ Unique<T>& Unique<T>::operator=(Unique<T>&& otherPointer) {
 
 template <class T>
 T& Unique<T>::operator*() const {
+    if (!data_) {
+        throw std::runtime_error("Nullptr dereference\n");
+    };
     return *data_;
 }
 
